@@ -1,6 +1,4 @@
 from diffusers.pipelines.stable_diffusion_xl.pipeline_stable_diffusion_xl_inpaint import StableDiffusionXLInpaintPipeline
-# from diffusers import AutoPipelineForInpainting
-# from diffusers.utils import load_image, make_image_grid
 from diffusers.utils import load_image
 import torch
 import pandas as pd
@@ -35,7 +33,7 @@ def main(args):
     strength = 0.99
     padding_mask_crop = 2
     RES = (224, 632)
-    # needed to ovecome the sdxl bias
+    # needed to ovecome the sdxl shape bias
     TARGET = (1024, 1024)
 
 

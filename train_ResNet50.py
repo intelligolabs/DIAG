@@ -17,7 +17,7 @@ class KSDD2ResNet50(nn.Module):
     def __init__(self):
         super(KSDD2ResNet50, self).__init__()
 
-        # Load the pre-trained ResNet-18 model from torchvision.models.
+        # Load the pre-trained ResNet-50 model from torchvision.models.
         self.model = models.resnet50(weights=ResNet50_Weights.IMAGENET1K_V1)
 
         # Change the output layer to output 1 class score instead of 1000 classes.
@@ -66,10 +66,7 @@ def evaluate(model, criterion, test_loader, device, log_dict):
     precision = precision_[ix_best]
     recall = recall_[ix_best]
 
-    # Sanity check.
     classifications = predictions > best_threshold
-    precision_s = precision_score(targets, classifications)
-    recall_s = recall_score(targets, classifications)
 
     FPR, TPR, _ = roc_curve(targets, predictions)
     AUC = auc(FPR, TPR)
@@ -82,7 +79,7 @@ def evaluate(model, criterion, test_loader, device, log_dict):
     print('AVG loss: {:.4f}, ACC: {}/{} ({:.0f}%), Precision: {:.4f}, Recall: {:.4f}, AP: {:.4f}'.format(
             t_loss, correct, len(test_loader.dataset), accuracy, precision, recall, AP))
     
-    # log metrics to wandb.
+    # log metrics
     log_dict['val_ACC'] = accuracy
     log_dict['val_PRECISION'] = precision
     log_dict['val_RECALL'] = recall
@@ -139,8 +136,7 @@ def main(args):
     model = KSDD2ResNet50()
     model.to(device)
 
-    # Define the loss function and the optimizer.
-    # criterion = nn.CrossEntropyLoss()
+    # Define the loss function and the optimizer
     criterion = nn.BCEWithLogitsLoss(reduction='mean')
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
 
@@ -158,7 +154,6 @@ def main(args):
             # Training step for the single batch.
             model.zero_grad()
             outputs = model(x)
-            # TODO: check that this does not break anything.
             outputs = outputs.squeeze(1)
             loss = criterion(outputs, y.float())
             epoch_loss += loss.item()

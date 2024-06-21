@@ -39,10 +39,6 @@ class KolektorSDD2(Dataset):
     """
 
     labels = ['ok', 'defect']
-    # scales = {'1408x512': 1., '704x256': .5, 'half': .5}
-    # output_sizes = {'1408x512': (1408, 512),
-    #                 '704x256': (704, 256),
-    #                 'half': (704, 256)}
 
     # ImageNet.
     mean = (0.485, 0.456, 0.406)
@@ -61,9 +57,6 @@ class KolektorSDD2(Dataset):
         self.split_path = None
         self.split = 'train' if 'val' == split else split
 
-        # self.scale = scale
-        # self.fxy = self.scales[scale]
-        # self.output_size = self.output_sizes[scale]
         self.output_size = (704, 256)
         self.negative_only = negative_only
         self.add_augmented = add_augmented
@@ -81,7 +74,6 @@ class KolektorSDD2(Dataset):
         self.normalize = T.Normalize(KolektorSDD2.mean, KolektorSDD2.std)
 
         self.load_imgs()
-            # torch.save((self.samples, self.masks, self.product_ids), image_cache_path)
         if negative_only:
             m = self.masks.sum(-1).sum(-1) == 0
             self.samples = self.samples[m]
