@@ -77,12 +77,13 @@ Federico Girella, Ziyue Liu, Franco Fummi, Francesco Setti, Marco Cristani, Luig
 `name.surname@univr.it`
 
 ## Citation ##
-If you use [**DIAG**](https://arxiv.org/abs/2407.03961), please, cite the following paper:
+If you use [**DIAG**](https://ieeexplore.ieee.org/abstract/document/10858875), please, cite the following paper:
 ```
-@article{girella2024leveraging,
-  title={Leveraging Latent Diffusion Models for Training-Free In-Distribution Data Augmentation for Surface Defect Detection},
-  author={Girella, Federico and Liu, Ziyue and Fummi, Franco and Setti, Francesco and Cristani, Marco and Capogrosso, Luigi},
-  journal={arXiv preprint arXiv:2407.03961},
-  year={2024}
+@InProceedings{girella2024leveraging,
+  author    = {Girella, Federico and Liu, Ziyue and Fummi, Franco and Setti, Francesco and Cristani, Marco and Capogrosso, Luigi},
+  booktitle = {International Conference on Content-Based Multimedia Indexing (CBMI)},
+  title     = {{Leveraging Latent Diffusion Models for Training-Free in-Distribution Data Augmentation for Surface Defect Detection}},
+  year      = {2024},
+  doi       = {10.1109/cbmi62980.2024.10858875},
 }
 ```
